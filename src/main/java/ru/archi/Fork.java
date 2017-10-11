@@ -14,7 +14,7 @@ public class Fork {
         return false;
     }
 
-    public void putFork(){
+    public synchronized void putFork(){
         taken = false;
     }
 }
