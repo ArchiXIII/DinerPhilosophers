@@ -5,43 +5,43 @@ package main.java.ru.archi;
  */
 public class Philosopher {
     private int numberPhilosopher;
-    private Fork[] forks;
-    private Fork[] takenForks = new Fork[2];
+    private Fork leftFork;
+    private Fork rightFork;
 
-    public Philosopher(Fork[] forks, int numberPhilosopher) {
-        this.forks = forks;
+    public Philosopher(Fork leftForks, Fork rightFork, int numberPhilosopher) {
+        this.leftFork = leftForks;
+        this.rightFork = rightFork;
         this.numberPhilosopher = numberPhilosopher;
     }
 
     public void act(){
-        int forkCount = 0;
+        /*for(int i = 0; i < 10; i++){
+            if(!leftFork.isTaken()){
+                leftFork.
+            }
+        }*/
+
         int attemptsToTake = 0;
-        while (forkCount < 2){
-            for(int i=0; i<5; i++){
-                if(forkCount < 2 && forks[i].takeFork()){
-                    takenForks[forkCount++] = forks[i];
-                }else {
-                    attemptsToTake++;
-                    if(attemptsToTake > 10) {
-                        putForks();
-                        forkCount = 0;
-                    }
-                }
+        while (!leftFork.isTaken() || !rightFork.isTaken()){
+            if(!leftFork.isTaken()){
+                leftFork.takeFork();
+            }
+            if (!rightFork.isTaken()) {
+                rightFork.takeFork();
+            }
+            attemptsToTake++;
+            if(attemptsToTake > 10) {
+                putForks();
             }
         }
-
         eat();
         putForks();
         think();
     }
 
     private void putForks(){
-        if (takenForks[0] != null) {
-            takenForks[0].putFork();
-        }
-        if (takenForks[1] != null) {
-            takenForks[1].putFork();
-        }
+        leftFork.putFork();
+        rightFork.putFork();
     }
 
     private void eat(){

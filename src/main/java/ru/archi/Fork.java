@@ -25,4 +25,11 @@ public class Fork {
         taken = false;
         locker.unlock();
     }
+
+    public boolean isTaken(){
+        if(!taken){
+            locker.lock();
+        }
+        return taken;
+    }
 }

@@ -12,10 +12,17 @@ public class Controller {
 
         for (int i=0; i<5; i++) {
             int numberPhilosopher = i;
+            int firstFork = i;
+            int secondFork;
+            if (i < 4) {
+                secondFork = i + 1;
+            } else {
+                secondFork = 0;
+            }
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Philosopher philosopher = new Philosopher(forks, numberPhilosopher);
+                    Philosopher philosopher = new Philosopher(forks[firstFork], forks[secondFork], numberPhilosopher);
                     while (true) {
                         try {
                             Thread.sleep(1000);
