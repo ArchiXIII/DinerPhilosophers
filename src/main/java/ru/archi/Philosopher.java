@@ -15,28 +15,17 @@ public class Philosopher {
     }
 
     public void act(){
-        /*for(int i = 0; i < 10; i++){
-            if(!leftFork.isTaken()){
-                leftFork.
-            }
-        }*/
-
-        int attemptsToTake = 0;
-        while (!leftFork.isTaken() || !rightFork.isTaken()){
-            if(!leftFork.isTaken()){
-                leftFork.takeFork();
-            }
-            if (!rightFork.isTaken()) {
-                rightFork.takeFork();
-            }
-            attemptsToTake++;
-            if(attemptsToTake > 10) {
-                putForks();
-            }
+        synchronized (Philosopher.class) {
+            takeForks();
+            eat();
+            putForks();
+            think();
         }
-        eat();
-        putForks();
-        think();
+    }
+
+    private void takeForks(){
+        leftFork.takeFork();
+        rightFork.takeFork();
     }
 
     private void putForks(){
