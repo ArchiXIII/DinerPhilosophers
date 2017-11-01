@@ -20,8 +20,4 @@ public class Fork {
     public void putFork(){
         taken = false;
     }
-
-    public boolean isTaken(){
-        return taken;
-    }
 }
